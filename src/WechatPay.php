@@ -321,6 +321,17 @@ class WechatPay
 			return appResult($err->getMessage());
 		}
 	}
+	/**
+	 * [reply_callback 微信支付回调回复快捷方式]
+	 * @author 	   szjcomo
+	 * @createTime 2020-01-10
+	 * @param      array      $data [description]
+	 * @return     [type]           [description]
+	 */
+	public function reply_callback(array $data)
+	{
+
+	}
 
 	/**
 	 * [appResult 全局统一返回函数]
@@ -549,6 +560,17 @@ class WechatPay
 		if(isset($hanadelData['key'])) unset($hanadelData['key']);
 		//print_r($hanadelData);die;
 		return self::_arrayToXml($hanadelData);
+	}
+	/**
+	 * [arrayToXmlRaw 原生数组转xml]
+	 * @author 	   szjcomo
+	 * @createTime 2020-01-10
+	 * @param      array      $data [description]
+	 * @return     [type]           [description]
+	 */
+	public static function arrayToXmlRaw(array $data)
+	{
+		return self::_arrayToXml($data);
 	}
 	/**
 	 * [_arrayToXml 数组转xml]
