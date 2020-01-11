@@ -291,17 +291,10 @@ class WechatPay
 	 */
 	public static function jsPayOptions($data = [],$options = [])
 	{
-		if(empty($data)) return appResult('参数不能为空');
-		$tmpData = [];
-		if(empty($options)){
-			$callback = function($val,$key) use(&$tmpData){
-				$tmpData[strtolower($key)] = $val;
-			};
-			array_walk($options,$callback);			
-		}
+		if(empty($data)) return self::appResult('参数不能为空');
 		try{
 			if(isset($data['return_code']) && isset($data['result_code']) && $data['return_code'] == 'SUCCESS' && $data['result_code'] == 'SUCCESS'){
-				$baseOption = array_merge($data,$tmpData);
+				$baseOption = array_merge($data,$options);
 				$params = [
 					'appId'=>$baseOption['appid'],
 					'nonceStr'=>self::getRandStr(),
@@ -321,18 +314,6 @@ class WechatPay
 			return appResult($err->getMessage());
 		}
 	}
-	/**
-	 * [reply_callback 微信支付回调回复快捷方式]
-	 * @author 	   szjcomo
-	 * @createTime 2020-01-10
-	 * @param      array      $data [description]
-	 * @return     [type]           [description]
-	 */
-	public function reply_callback(array $data)
-	{
-
-	}
-
 	/**
 	 * [appResult 全局统一返回函数]
 	 * @author 	   szjcomo
@@ -637,7 +618,7 @@ class WechatPay
 	 * @version   [1.5.0]
 	 * @param     array      $data [description]
 	 */
-	protected static function makeSign($data = [])
+	public static function makeSign($data = [])
 	{
 		ksort($data);
 		$string = '';
