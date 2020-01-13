@@ -298,7 +298,7 @@ class WechatPay
 				$params = [
 					'appId'=>$baseOption['appid'],
 					'nonceStr'=>self::getRandStr(),
-					'timeStamp'=>szjTime(),
+					'timeStamp'=>time(),
 					'signType'=>'MD5',
 					'package'=>'prepay_id='.$baseOption['prepay_id'],
 					'key'=>$baseOption['key']
